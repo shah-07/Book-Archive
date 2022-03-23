@@ -5,16 +5,22 @@ const loadBooks = async (searchText) => {
   const data = await res.json();
   displayBooks(data)
 }
+
+
 //spinner
 const toggleSpinner = (displayStyle, height) => {
   document.getElementById('spinner').style.display = displayStyle;
   document.getElementById('spinner-container').style.height = height;
 }
+
+
 //Remove Previous Search Reasult
 const removeSearchResult = () => {
   document.getElementById('num-found').textContent = '';
   document.getElementById('books').textContent = '';
 }
+
+
 //Search Books (main function)
 const searchBooks = () => {
   const searchText = document.getElementById('search-field').value;
@@ -23,8 +29,9 @@ const searchBooks = () => {
   toggleSpinner('block', '350px');
   removeSearchResult();
   loadBooks(searchText);
-  document.getElementById('search-field').value = '';
 }
+
+
 //show Books that searched
 const displayBooks = (books) => {
   //if nothing is searching for spinner
@@ -32,13 +39,19 @@ const displayBooks = (books) => {
     toggleSpinner('none', '0px');
   }
 
+  //get search field value
+  const searchText = document.getElementById('search-field').value;
+
   //show how many search results is founding
   const numberFoundContainer = document.getElementById('num-found');
   const div = document.createElement('div');
   div.innerHTML = `
-    <p class="text-center">Search Results Found: ${books.numFound}</p>
+    <p class="text-center">"${searchText}" Search Results Found: ${books.numFound}</p>
   `;
   numberFoundContainer.appendChild(div);
+
+  //Clear Search field
+  document.getElementById('search-field').value = '';
 
   //show books of search results
   const booksContainer = document.getElementById('books');
@@ -66,6 +79,7 @@ const displayBooks = (books) => {
       `;
       div.appendChild(div2);
       booksContainer.appendChild(div);
+
       //hide spinner
       toggleSpinner('none', '0px');
     }
