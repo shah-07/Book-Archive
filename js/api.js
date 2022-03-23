@@ -58,7 +58,6 @@ const displayBooks = (books) => {
   books?.docs.forEach(book => {
     //if photo and author name and publisher name and publish data is available
     if (book.cover_i !== undefined && book.author_name && book.publisher && book.publish_date) {
-      console.log(book)
       const url = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
       //create html of book card
       const div = document.createElement('div');
